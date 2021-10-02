@@ -17,7 +17,7 @@ Como podra notar, los autos son vinculados con sus respectivos semaforos a trave
 ### Threading
 Para implementar hilos en este proyecto utilice coroutine, una clase de funcion propiciada por Unity para pausar la ejecucion de cambio de estado en los semaforos. Para realizar una corutina, se debe encapsular la funcion en un enumerador; en este caso encapsule el flujo de trafico.
 
-```
+```csharp
 IEnumerator trafficFlow()
     {
         while (true)
@@ -37,4 +37,4 @@ IEnumerator trafficFlow()
     }
 ```
 
-
+En el que upDownGo() pone los semaforos de la avenida vertical en verde, leftRightGo() a los semaforos de la avenida horizontal y trafficWarning() pone los estados en amarillo, pero manteniendo los estados anteriores antes del cambio.

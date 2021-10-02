@@ -23,7 +23,6 @@ public class Manager : MonoBehaviour
     {
         setTimeScale();
     }
-
     IEnumerator trafficFlow()
     {
         while (true)
