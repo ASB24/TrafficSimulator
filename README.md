@@ -16,20 +16,22 @@ Las relaciones entre los componentes se puede apreciar en este esquema:
 Como podra notar, los autos son vinculados con sus respectivos semaforos a traves de su orientacion, propiedad que comparten ambas entidades. 
 ### Threading
 Para implementar hilos en este proyecto utilice coroutine, una clase de funcion propiciada por Unity para pausar la ejecucion de cambio de estado en los semaforos. Para realizar una corutina, se debe encapsular la funcion en un enumerador; en este caso encapsule el flujo de trafico.
-`IEnumerator trafficFlow()`
-`    {`
-`        while (true)`
-`        {`
-`            upDownGo();`
-`            yield return new WaitForSeconds(5);`
 
-`            trafficWarning();`
-`            yield return new WaitForSeconds(3);`
+IEnumerator trafficFlow()
+    {
+        while (true)
+        {
+            upDownGo();
+            yield return new WaitForSeconds(5);
 
-`            leftRightGo();`
-`            yield return new WaitForSeconds(4);`
+            trafficWarning();
+            yield return new WaitForSeconds(3);
 
-`            trafficWarning();`
-`            yield return new WaitForSeconds(3);`
-`        }`
-`    }`
+            leftRightGo();
+            yield return new WaitForSeconds(4);
+
+            trafficWarning();
+            yield return new WaitForSeconds(3);
+        }
+    }
+
