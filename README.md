@@ -17,6 +17,7 @@ Como podra notar, los autos son vinculados con sus respectivos semaforos a trave
 ### Threading
 Para implementar hilos en este proyecto utilice coroutine, una clase de funcion propiciada por Unity para pausar la ejecucion de cambio de estado en los semaforos. Para realizar una corutina, se debe encapsular la funcion en un enumerador; en este caso encapsule el flujo de trafico.
 
+```
 IEnumerator trafficFlow()
     {
         while (true)
@@ -34,4 +35,6 @@ IEnumerator trafficFlow()
             yield return new WaitForSeconds(3);
         }
     }
+```
+
 
