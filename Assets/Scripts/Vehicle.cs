@@ -27,7 +27,7 @@ public class Vehicle : MonoBehaviour
     void Update()
     {
         distance = Vector3.Distance(this.transform.position, frontLight.transform.position);
-        if (frontLight.GetComponent<stopLight>().isGreen || distance < 2.3) speed = 3;
+        if (frontLight.GetComponent<stopLight>().isGreen || isOverBoundary() ) speed = 3;
         else stop();
 
         transform.Translate(new Vector2(0, speed * Time.deltaTime));
@@ -91,6 +91,29 @@ public class Vehicle : MonoBehaviour
         else if ((Orientation)value == Orientation.Left) return Orientation.Left;
         else if ((Orientation)value == Orientation.Right) return Orientation.Right;
         return Orientation.Left;
+    }
+
+    private bool isOverBoundary()
+    {
+        switch (this.orientation)
+        {
+            case Orientation.Up:
+                if (this.transform.position.y - frontLight.transform.position.y > -2.3) return true;
+                return false;
+            case Orientation.Down:
+                if (this.transform.position.y - frontLight.transform.position.y < 2.3) return true;
+                return false;
+            case Orientation.Right:
+                if (this.transform.position.x - frontLight.transform.position.x > -2.3) return true;
+                return false;
+            case Orientation.Left:
+                if (this.transform.position.x - frontLight.transform.position.x < 2.3) return true;
+                return false;
+            default:
+                print("hay bobo");
+                break;
+        }
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
