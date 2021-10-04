@@ -6,6 +6,7 @@ public enum Orientation { Up, Down, Left, Right };
 
 public class Vehicle : MonoBehaviour
 {
+    Rigidbody2D rb;
     SpriteRenderer sr;
     public float speed;
     public bool hitGas = true;
@@ -18,6 +19,7 @@ public class Vehicle : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         speed = 3;
         this.orientation = setOrientation(randOrientation());
         frontLight = setStopLight();
@@ -30,7 +32,7 @@ public class Vehicle : MonoBehaviour
         if (frontLight.GetComponent<stopLight>().isGreen || isOverBoundary() ) speed = 3;
         else stop();
 
-        transform.Translate(new Vector2(0, speed * Time.deltaTime));
+        rb.MovePosition(transform.position + getOrientationVector());
     }
 
     public void stop()
@@ -93,6 +95,15 @@ public class Vehicle : MonoBehaviour
         return Orientation.Left;
     }
 
+    private Vector3 getOrientationVector()
+    {
+        if (this.orientation == Orientation.Up) return new Vector3(0, speed * Time.deltaTime, 0);
+        else if (this.orientation == Orientation.Down) return new Vector3(0, -speed * Time.deltaTime, 0);
+        else if (this.orientation == Orientation.Right) return new Vector3(speed * Time.deltaTime, 0, 0);
+        else if (this.orientation == Orientation.Left) return new Vector3(-speed * Time.deltaTime, 0, 0);
+        return new Vector3(0,0,0);
+    }
+
     private bool isOverBoundary()
     {
         switch (this.orientation)
@@ -121,16 +132,9 @@ public class Vehicle : MonoBehaviour
         if(collision.tag == "Destroyer") Destroy(this.gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Vehicle")
-        {
-            stop();
-            if(orientation == Orientation.Up) transform.Translate(new Vector2(0, -0.05f));
-            else if(orientation == Orientation.Down) transform.Translate(new Vector2(0, 0.05f));
-            else if(orientation == Orientation.Left) transform.Translate(new Vector2(-0.05f, 0));
-            else if(orientation == Orientation.Right) transform.Translate(new Vector2(0.05f, 0));
-        }
+        if (collision.collider.tag == "Vehicle") setOrientation(randOrientation());
     }
 
 }
