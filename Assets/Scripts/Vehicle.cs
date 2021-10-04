@@ -109,16 +109,16 @@ public class Vehicle : MonoBehaviour
         switch (this.orientation)
         {
             case Orientation.Up:
-                if (this.transform.position.y - frontLight.transform.position.y > -2.3) return true;
+                if (this.transform.position.y - frontLight.transform.position.y > -3) return true;
                 return false;
             case Orientation.Down:
-                if (this.transform.position.y - frontLight.transform.position.y < 2.3) return true;
+                if (this.transform.position.y - frontLight.transform.position.y < 3) return true;
                 return false;
             case Orientation.Right:
-                if (this.transform.position.x - frontLight.transform.position.x > -2.3) return true;
+                if (this.transform.position.x - frontLight.transform.position.x > -3) return true;
                 return false;
             case Orientation.Left:
-                if (this.transform.position.x - frontLight.transform.position.x < 2.3) return true;
+                if (this.transform.position.x - frontLight.transform.position.x < 3) return true;
                 return false;
             default:
                 print("hay bobo");
