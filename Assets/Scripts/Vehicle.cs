@@ -130,6 +130,7 @@ public class Vehicle : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Destroyer") Destroy(this.gameObject);
+        else if(collision.tag == "Vehicle") setOrientation(randOrientation());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
